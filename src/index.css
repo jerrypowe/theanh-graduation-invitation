@@ -1,0 +1,329 @@
+/* Font Faces */
+@font-face {
+  font-family: 'UVNHoaTay';
+  src: url('/fonts/uvnhoatay1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ergisa';
+  src: url('/fonts/ergisa.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hastegi';
+  src: url('/fonts/hastegi.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ecatherina';
+  src: url('/fonts/ecatherina.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Arcittya';
+  src: url('/fonts/arcittya.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Silenter';
+  src: url('/fonts/silenter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Camiro';
+  src: url('/fonts/camiro.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ralsihten';
+  src: url('/fonts/ralsihten.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UVNKeChuyen';
+  src: url('/fonts/uvnkechuyen3.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --sage-primary: #758667;
+  --sage-dark: #4b5840;
+  --sage-envelope: #8d9c79;
+  --sage-light: #f2f5ee;
+  --sage-border: #a4b395;
+  --cream-bg: #faf8f5;
+  --gold-accent: #b59863;
+  --text-main: #333d2e;
+  --text-body: #4c5647;
+  --text-light: #7b8875;
+  
+  --font-script: 'UVNHoaTay', 'Alex Brush', 'Pinyon Script', cursive;
+  --font-serif: 'Ergisa', 'Cormorant Garamond', 'Playfair Display', serif;
+  --font-title: 'Ecatherina', 'Cinzel', serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-alt-script: 'Hastegi', 'Alex Brush', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #e9ece4;
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+/* Base App Wrapper (Card style on desktop, full-width on mobile) */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--cream-bg);
+  background-image: url('/assets/paper-bg.png');
+  background-repeat: repeat;
+  background-size: 480px auto;
+  box-shadow: 0 10px 40px rgba(45, 55, 40, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 2.2s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 12s linear infinite;
+}
+
+.animate-float {
+  animation: floatGentle 3s ease-in-out infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Floating Music Player Button */
+.music-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: calc(50% - 220px);
+  z-index: 999;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid var(--sage-border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--sage-dark);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 520px) {
+  .music-toggle-btn {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(117, 134, 103, 0.3);
+}
+
+.music-toggle-btn.playing {
+  border-color: var(--sage-primary);
+  color: var(--sage-primary);
+}
+
+/* Sound wave effect */
+.sound-waves {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 14px;
+}
+
+.sound-bar {
+  width: 2.5px;
+  background-color: var(--sage-primary);
+  border-radius: 2px;
+  animation: soundBarAnim 1s infinite ease-in-out;
+}
+
+.sound-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.sound-bar:nth-child(2) { height: 12px; animation-delay: 0.25s; }
+.sound-bar:nth-child(3) { height: 15px; animation-delay: 0.4s; }
+.sound-bar:nth-child(4) { height: 8px; animation-delay: 0.15s; }
+
+@keyframes soundBarAnim {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 38, 26, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 24px;
+  position: relative;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid rgba(135, 150, 119, 0.3);
+  background-image: url('/assets/paper-bg.png');
+  background-size: cover;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f3eb;
+  color: var(--sage-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: #e1e7da;
+}
+
+/* Smooth Button Styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--sage-primary);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 28px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(117, 134, 103, 0.35);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--sage-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(117, 134, 103, 0.45);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ffffff;
+  color: var(--sage-primary);
+  border: 1.5px solid var(--sage-primary);
+  padding: 11px 24px;
+  border-radius: 28px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: var(--sage-light);
+  transform: translateY(-2px);
+}
+
+/* Responsive custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sage-border);
+  border-radius: 3px;
+}
